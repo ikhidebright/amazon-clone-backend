@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const { connect } = require('mongoose')
 const dotenv = require("dotenv")
+const productRoute = require('./routes/product')
 
 dotenv.config()
 
@@ -22,13 +23,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get('/', (req, res) => {
-    res.json('Hello Amazon clone')
-});
-
-app.post('/', (req, res) => {
-    console.log(req.body)
-});
+app.use('/api', productRoute)
 
 app.listen(3000, (err) => {
     if (err) {
